@@ -54,10 +54,19 @@
             @csrf
             <div class="flex flex-col gap-5">
                 <label for="">Name</label>
+                @error('name')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
                 <input type="text" name="name" class="border px-4 py-2 rounded">
                 <label for="">Description</label>
+                @error('description')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
                 <input type="text" name="description" class="border px-4 py-2 rounded">
                 <label for="">Image</label>
+                @error('image')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
                 <input type="file" name="image" class="border px-4 py-2 rounded">
                 <input type="submit" class="bg-green-500 text-white py-2 px-4 rounded inline-block">
             </div>
