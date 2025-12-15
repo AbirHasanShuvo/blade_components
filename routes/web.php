@@ -22,3 +22,5 @@ Route::get('/edit/{id}', [PostController::class, 'editData'])->name('edit');
 Route::post('/update/{id}', [PostController::class, 'updateData'])->name('update');
 
 Route::get('/delete/{id}', [PostController::class, 'deleteData'])->name('delete');
+
+Route::get('/search', [PostController::class, 'search'])->name('search');

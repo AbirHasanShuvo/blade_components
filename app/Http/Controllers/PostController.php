@@ -91,4 +91,29 @@ class PostController extends Controller
         flash()->success('Post deleted Successfully');
         return redirect()->route('home');
     }
+
+    // public function search(Request $request)
+    // {
+    //     $search = $request->search;
+    //     $posts = Post::where(function ($query) use ($search) {
+    //         $query->where("name", "description", "%$search");
+    //     })->get();
+
+    //     return view();
+    // }
+
+    //search function
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where(function ($query) use ($search) {
+            $query->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+        })
+            ->paginate(5)   // same pagination as home
+            ->withQueryString();
+
+        return view('welcome', compact('posts'));
+    }
 }

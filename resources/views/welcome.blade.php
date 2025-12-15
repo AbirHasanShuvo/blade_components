@@ -36,6 +36,18 @@
             </h2>
         @endif
 
+
+        <form action="{{ route('search') }}" method="GET" class="my-5 flex gap-3">
+            <input type="text" name="search" value="{{ request('search') }}"
+                placeholder="Search by name or description..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+
+            <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                Search
+            </button>
+        </form>
+
+
         <div>
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
