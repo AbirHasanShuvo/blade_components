@@ -18,8 +18,8 @@ class PostController extends Controller
 
         $validator = $request->validate([
             'name' => 'required|max:255',
-            'description' => 'required',
-            'image' => 'required',
+            'description' => 'required'
+            // 'image' => 'required',
         ]);
 
         //upload image
