@@ -37,7 +37,8 @@ class PostController extends Controller
         $post->save();
 
         //redirect to the home page
-        return redirect()->route('home')->with('success', 'Your Post has been Created!');
+        flash()->success('Post created Successfully');
+        return redirect()->route('home');
     }
 
     public function editData($id)
@@ -79,7 +80,15 @@ class PostController extends Controller
 
 
         $post->save();
+        flash()->success('Post updated Successfully');
+        return redirect()->route('home');
+    }
 
-        return redirect()->route('home')->with('Succes', 'Your post has been updated');
+    public function deleteData($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        flash()->success('Post deleted Successfully');
+        return redirect()->route('home');
     }
 }

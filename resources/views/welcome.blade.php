@@ -41,24 +41,24 @@
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div class="overflow-hidden">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
+                            <table class="min-w-full divide-y divide-gray-200 border border-green-300 my-5">
+                                <thead class="bg-green-600">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                            class="px-6 py-3 text-start text-xs font-medium text-white uppercase">
                                             Id</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                            class="px-6 py-3 text-start text-xs font-medium text-white uppercase">
                                             Name
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                            class="px-6 py-3 text-start text-xs font-medium text-white uppercase">
                                             Description</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
+                                            class="px-6 py-3 text-center text-xs font-medium text-white uppercase">
                                             Image</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">
+                                            class="px-6 py-3 text-end text-xs font-medium text-white uppercase">
                                             Action</th>
                                     </tr>
                                 </thead>
@@ -74,7 +74,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                 {{ $item->description }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                            <td class="px-6 py-4 whitespace-nowrap text-middle text-sm text-gray-800">
                                                 <img src="image/{{ $item->image }}" width="80px" height="80px"
                                                     alt="">
                                             </td>
@@ -82,10 +82,26 @@
                                                 {{-- <button type="button"
                                                     class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-hidden focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Edit</button> --}}
 
-                                                <a href="{{ route('edit', $item->id) }}"
+                                                {{-- <a href="{{ route('edit', $item->id) }}"
                                                     class="inline-block px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold rounded-lg shadow-md hover:from-green-500 hover:to-green-700 hover:shadow-lg transition-all duration-300">
                                                     Edit
                                                 </a>
+
+                                                <a href="{{ route('edit', $item->id) }}"
+                                                    class="inline-block px-6 py-3 bg-gradient-to-r from-red-400 to-red-600 text-white font-semibold rounded-lg shadow-md hover:from-green-500 hover:to-green-700 hover:shadow-lg transition-all duration-300">
+                                                    Delete
+                                                </a> --}}
+
+                                                <a href="{{ route('edit', $item->id) }}"
+                                                    class="inline-flex w-28 justify-center px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold rounded-lg shadow-md hover:from-green-500 hover:to-green-700 hover:shadow-lg transition-all duration-300">
+                                                    Edit
+                                                </a>
+
+                                                <a href="{{ route('delete', $item->id) }}"
+                                                    class="inline-flex w-28 justify-center px-6 py-3 bg-gradient-to-r from-red-400 to-red-600 text-white font-semibold rounded-lg shadow-md hover:from-red-500 hover:to-red-700 hover:shadow-lg transition-all duration-300">
+                                                    Delete
+                                                </a>
+
 
                                         </tr>
                                     @endforeach
@@ -93,8 +109,10 @@
 
 
 
+
                                 </tbody>
                             </table>
+                            {{ $posts->links() }}
                         </div>
                     </div>
                 </div>
