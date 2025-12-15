@@ -19,15 +19,67 @@ class PostController extends Controller
         $validator = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required',
         ]);
 
+        //upload image
+        $imageName = '';
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('/image'), $imageName);
+        }
+
+
+        //add new post
         $post->name = $request->name;
         $post->description = $request->description;
-        $post->image = $request->image;
+        $post->image = $imageName;
         $post->save();
 
         //redirect to the home page
         return redirect()->route('home')->with('success', 'Your Post has been Created!');
+    }
+
+    public function editData($id)
+    {
+        // dd($id);
+        //this dd is basically a great feature and by it i can see the id
+
+        $post = Post::find($id);
+        return view('edit', ['ourPost' => $post]);
+    }
+
+    public function updateData($id, Request $request)
+    {
+        // dd($id);
+
+
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required'
+
+        ]);
+
+        // $imageName = null;
+
+
+
+        //update the post
+        $post = Post::find($id);
+        $post->name = $request->name;
+        $post->description = $request->description;
+
+        if (isset($request->image)) {
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('/image'), $imageName);
+            $post->image = $imageName;
+        }
+
+
+        $post->save();
+
+        return redirect()->route('home')->with('Succes', 'Your post has been updated');
     }
 }
