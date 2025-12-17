@@ -27,3 +27,6 @@ Route::get('/search', [PostController::class, 'search'])->name('search');
 
 Route::get('/import', [PostController::class, 'importCSV'])->name('import');
 Route::post('/import', [PostController::class, 'storeCSV'])->name('import.store');
+
+Route::get('/export-csv', [PostController::class, 'exportCsv'])
+    ->name('export.csv');

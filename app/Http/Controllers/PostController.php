@@ -182,4 +182,71 @@ class PostController extends Controller
         flash()->success('CSV imported successfully!');
         return redirect()->route('home');
     }
+
+
+    // public function exportCSV()
+    // {
+    //     $filename = 'posts_' . now()->format('Y_m_d_His') . 'csv';
+
+    //     $headers = [
+    //         'Content-Type' => 'text/csv',
+    //         'Content-Disposition' => 'attachment; filename=$filename'
+    //     ];
+
+    //     $callback = function () {
+    //         $file = fopen('php://output', 'w');
+
+    //         //csv column headers
+    //         fputcsv($file, ['ID', 'Name', 'Description', 'Image']);
+
+    //         Post::chunk(500, function ($posts) use ($file) {
+    //             foreach ($posts as $post) {
+    //                 fputcsv($file, [
+    //                     $post->id,
+    //                     $post->name,
+    //                     $post->description,
+    //                     $post->image
+
+    //                 ]);
+    //             }
+    //         });
+    //         fclose($file);
+    //     };
+
+    //     return response()->stream($callback, 200, $headers);
+    // }
+
+    //updated
+
+    public function exportCSV()
+    {
+        $fileName = 'posts_' . now()->format('Y_m_d_His') . '.csv';
+
+        $headers = [
+            "Content-Type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+        ];
+
+        $callback = function () {
+            $file = fopen('php://output', 'w');
+
+            // CSV column headers
+            fputcsv($file, ['ID', 'Name', 'Description', 'Image']);
+
+            Post::chunk(500, function ($posts) use ($file) {
+                foreach ($posts as $post) {
+                    fputcsv($file, [
+                        $post->id,
+                        $post->name,
+                        $post->description,
+                        $post->image,
+                    ]);
+                }
+            });
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

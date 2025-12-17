@@ -31,7 +31,9 @@
 
             <a href="{{ asset('demo/post.csv') }}" download class = "bg-yellow-600 text-white rounded py-2 px-4">Demo
                 CSV</a>
-            <a href="/import" class = "bg-yellow-600 text-white rounded py-2 px-4">Import by CSV</a>
+            <a href="/import" class = "bg-yellow-600 text-white rounded py-2 px-4">Import CSV</a>
+
+            <a href="{{ route('export.csv') }}" class = "bg-yellow-600 text-white rounded py-2 px-4">Export CSV</a>
 
             <a href="/create" class = "bg-green-600 text-white rounded py-2 px-4">Add New Post</a>
         </div>
