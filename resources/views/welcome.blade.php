@@ -28,7 +28,11 @@
     <div class="container">
         <div class="flex justify-between my-5">
             <h2 class='text-red-500 text-xl'>Home</h2>
+
+            <a href="{{ asset('demo/post.csv') }}" download class = "bg-yellow-600 text-white rounded py-2 px-4">Demo
+                CSV</a>
             <a href="/import" class = "bg-yellow-600 text-white rounded py-2 px-4">Import by CSV</a>
+
             <a href="/create" class = "bg-green-600 text-white rounded py-2 px-4">Add New Post</a>
         </div>
 
