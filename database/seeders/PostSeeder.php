@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Post;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 // namespace App\Models\Post;
 
@@ -14,19 +13,10 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::truncate();
+        // Post::truncate();
         $csvData = fopen(base_path('database/csv/test.csv'), 'r');
 
-        // $transRaw = true;
 
-        // while (($data = fgetcsv($csvData, '555', ',')) !== false) {
-        //     if (!$transRaw) {
-        //         Post::create([
-        //             'name' => $data[0],
-        //             'description' => $data[1],
-        //         ]);
-        //     }
-        // }
 
         $transRaw = true;
 

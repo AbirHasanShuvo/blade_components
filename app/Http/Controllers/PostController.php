@@ -92,16 +92,6 @@ class PostController extends Controller
         return redirect()->route('home');
     }
 
-    // public function search(Request $request)
-    // {
-    //     $search = $request->search;
-    //     $posts = Post::where(function ($query) use ($search) {
-    //         $query->where("name", "description", "%$search");
-    //     })->get();
-
-    //     return view();
-    // }
-
     //search function
     public function search(Request $request)
     {
@@ -115,5 +105,81 @@ class PostController extends Controller
             ->withQueryString();
 
         return view('welcome', compact('posts'));
+    }
+
+    public function importCSV()
+    {
+        return view('import');
+    }
+
+    // public function storeCSV(Request $request)
+    // {
+    //     $request->validate([
+    //         'csv' => 'required|file|mimes:csv,txt|max:2048'
+    //     ]);
+
+    //     $file = $request->file('csv');
+    //     $csvData = fopen($file->getRealPath(), 'r');
+
+    //     $isHeader = true;
+
+    //     while (($data = fgetcsv($csvData, 1000, ',')) != false) {
+    //         if ($isHeader) {
+    //             $isHeader = false;
+    //             continue;
+    //         }
+
+    //         if (empty($data[0]) && empty($data[1])) {
+    //             continue;
+    //         }
+
+    //         //creating in the database
+
+    //         Post::create([
+    //             'name' => $data[0],
+    //             'description' => $data[1],
+    //         ]);
+
+    //         fclose($csvData);
+
+    //         flash()->success('CSV imported successfully!');
+    //         return redirect()->route('home');
+    //     }
+    // }
+
+    //updated
+
+    public function storeCSV(Request $request)
+    {
+        $request->validate([
+            'csv' => 'required|file|mimes:csv,txt|max:2048'
+        ]);
+
+        $file = $request->file('csv');
+        $csvData = fopen($file->getRealPath(), 'r');
+
+        $isHeader = true;
+
+        while (($data = fgetcsv($csvData, 1000, ',')) !== false) {
+
+            if ($isHeader) {
+                $isHeader = false;
+                continue;
+            }
+
+            if (empty($data[0]) && empty($data[1])) {
+                continue;
+            }
+
+            Post::create([
+                'name' => $data[0],
+                'description' => $data[1],
+            ]);
+        }
+
+        fclose($csvData);
+
+        flash()->success('CSV imported successfully!');
+        return redirect()->route('home');
     }
 }

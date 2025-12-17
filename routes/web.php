@@ -24,3 +24,6 @@ Route::post('/update/{id}', [PostController::class, 'updateData'])->name('update
 Route::get('/delete/{id}', [PostController::class, 'deleteData'])->name('delete');
 
 Route::get('/search', [PostController::class, 'search'])->name('search');
+
+Route::get('/import', [PostController::class, 'importCSV'])->name('import');
+Route::post('/import', [PostController::class, 'storeCSV'])->name('import.store');
